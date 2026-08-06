@@ -1,0 +1,18 @@
+# Request parameters (Goal)
+string[] classes
+---
+# Result
+bool success
+---
+# Continuous feedback during transfer learning process
+float64 elapsed_time
+bool dataset_created
+int32 current_epoch
+int32 total_epochs
+int32 batch_count
+int32 num_batches_per_epoch
+float64 training_accuracy
+float64 validation_accuracy
+float64 loss
+int32 samples_processed
+int32 total_samples

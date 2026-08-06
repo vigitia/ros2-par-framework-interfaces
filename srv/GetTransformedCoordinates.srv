@@ -1,0 +1,9 @@
+string camera_name
+geometry_msgs/Point[] coordinates
+int16 source_resolution_width
+int16 source_resolution_height
+int16 target_resolution_width
+int16 target_resolution_height
+bool backwards_transform false
+---
+geometry_msgs/Point[] transformed_coordinates

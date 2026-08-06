@@ -1,0 +1,9 @@
+string filepath
+string filename
+string current_class
+---
+string filepath
+string filename
+string current_class
+bool success
+geometry_msgs/Point[] contour_points
