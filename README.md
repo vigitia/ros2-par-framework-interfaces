@@ -6,16 +6,16 @@ Shared ROS 2 message, service and action definitions for the
 [PAR framework](https://github.com/vigitia/ros2-par-framework) — the contract every node in the framework
 talks over. Provides the package `custom_interfaces`.
 
-You do not need to clone this repository directly: it is listed in the framework's `config/nodes.list`, and
-`./setup.sh` there checks it out into the workspace along with the nodes.
-
 ## Using it from a node
+
+Add dependency in package.xml:
 
 ```xml
 <!-- package.xml -->
 <depend>custom_interfaces</depend>
 ```
 
+Import what you need in your python code, e.g.:
 ```python
 from custom_interfaces.msg import Object, ObjectList
 from custom_interfaces.srv import GetHomography
