@@ -1,0 +1,7 @@
+# Written by Claude Code
+# Stores new projection corners and republishes them on /projection_corners
+ProjectionCorners corners
+---
+bool success
+# Reason if success is false
+string message
