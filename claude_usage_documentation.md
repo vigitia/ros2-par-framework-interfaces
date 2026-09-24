@@ -49,3 +49,11 @@ reading the node source (x/y converted to pixels in place, z left in mediapipe's
   units are documented on the arrays.
 
 **Tested:** built on the host with the hand_landmarks node; the node published `HandLandmarksList` end to end.
+
+## HandLandmarksList: only hands of the current frame
+
+**What changed:** comment in `HandLandmarksList.msg`: the list holds only the hands detected in that frame; a hand
+missing for less than 1 s keeps its id when it reappears but is not listed while missing. No field changes.
+
+**Why:** the hand_landmarks node stopped publishing stale hands (see its documentation), and consumers need to know
+that absence from the list does not mean the id is gone.
