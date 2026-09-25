@@ -83,3 +83,17 @@ stay for ported code.
 
 **Tested:** built on the host; `ros2 interface show` resolves both; the synthetic end-to-end run in
 `ros2-par-framework` used them.
+
+### HandLandmarks.hand_landmarks_3d comment up to date (2026-09-25)
+
+**What:** the comment on `hand_landmarks_3d` in `msg/HandLandmarks.msg` now says what the hand_landmarks node fills
+in: metres (not "the unit of the depth image"), in the optical frame, from a depth image registered to the colour
+image, only with `use_depth`, and in the same order as `hand_landmarks`. It also says when -1, -1, -1 is used (no
+measurement, outside the image, too far from the rest of the hand). "Currently never filled" is gone. Changed on
+`main`, at your request.
+
+**Why:** the field is filled since hand_landmarks computes depth per landmark, and `rviz_bridge` draws the hands in
+3D from it.
+
+**Tested:** `colcon build --packages-select custom_interfaces` passes. Only a comment changed, so the type hash and
+all dependent builds stay as they are.

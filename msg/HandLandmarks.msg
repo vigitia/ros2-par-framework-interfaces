@@ -17,7 +17,8 @@ float64 confidence
 #    x before the pixel conversion, i.e. in image widths, not pixels. Low accuracy.
 HandLandmark[] hand_landmarks
 
-# Position in the camera's optical frame (x right, y down, z forward), in the unit of the depth image (millimetres
-# for the Azure Kinect), reconstructed from a depth image. -1, -1, -1 for landmarks judged occluded.
-# Currently never filled.
+# Position in the camera's optical frame (x right, y down, z forward), in metres (ROS2 wants meters, not mm), from a
+#depth image registered to the colour image (hand_landmarks with use_depth, e.g. the Azure Kinect). Same order as
+# hand_landmarks. -1, -1, -1 for landmarks without a usable depth (no measurement, outside the image, or too far from
+# the rest of the hand, e.g. a fingertip whose depth hit the table behind it). Empty without use_depth.
 HandLandmark[] hand_landmarks_3d
