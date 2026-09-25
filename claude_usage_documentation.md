@@ -57,3 +57,29 @@ missing for less than 1 s keeps its id when it reappears but is not listed while
 
 **Why:** the hand_landmarks node stopped publishing stale hands (see its documentation), and consumers need to know
 that absence from the list does not mean the id is gone.
+
+### `ProjectionMapping.msg` and `SetProjectionMapping.srv` (2026-09-24)
+
+**What:** both are new and added to `rosidl_generate_interfaces()`.
+- `msg/ProjectionMapping.msg`:
+  - header (`frame_id` = the table frame `world`, stamp = calibration time);
+  - `projector_width`/`projector_height`;
+  - `float64[9] homography`, row-major: `[u v w] = H [x y 1]`, x/y in metres on the table plane, pixel =
+    `(u/w, v/w)`;
+  - `reprojection_error`, RMS in projector pixels.
+- `srv/SetProjectionMapping.srv`: `ProjectionMapping mapping` → `success`, `message`.
+
+Only `std_msgs` is referenced, already declared.
+
+**Why:** the table-to-projector homography, fitted by `projection_calibrator` (in `surface_selector`) and held by
+`projection_mapping_node` (in `ros2-par-framework`), which publishes it latched on `/projection_mapping`. It
+replaces VIGITIA's `GetHomography`/`GetTransformedCoordinates` round trips for new nodes. Those legacy definitions
+stay for ported code.
+
+**Alternatives:**
+- *A camera → projector homography:* the table in metres is the framework's common frame. It carries the lens
+  undistortion, and RViz and projection share it.
+- *`float32[]` of any length (as in `GetHomography`):* the fixed `float64[9]` states the shape and keeps precision.
+
+**Tested:** built on the host; `ros2 interface show` resolves both; the synthetic end-to-end run in
+`ros2-par-framework` used them.
