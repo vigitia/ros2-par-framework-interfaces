@@ -12,3 +12,9 @@ float64 y3
 # centroid
 float64 x_centroid
 float64 y_centroid
+# Added with the help of Claude Code:
+# The four vertices in the camera's optical frame (x right, y down, z forward), in metres, in the same order as
+# x0/y0 ... x3/y3. From a depth image registered to the colour image (fiducials_detector with use_depth, e.g. the
+# Azure Kinect): a plane fitted to the depth inside the marker, intersected with the vertices' rays.
+# Empty without use_depth, or when the marker has too little valid depth.
+geometry_msgs/Point[] corners_3d

@@ -97,3 +97,30 @@ measurement, outside the image, too far from the rest of the hand). "Currently n
 
 **Tested:** `colcon build --packages-select custom_interfaces` passes. Only a comment changed, so the type hash and
 all dependent builds stay as they are.
+
+### Fiducial.corners_3d (2026-09-25)
+
+**What:** `msg/Fiducial.msg` gets `geometry_msgs/Point[] corners_3d`: the four vertices in the optical frame, in metres,
+in the order of x0/y0 ... x3/y3, from a plane fitted to the depth inside the marker. Empty without depth. Changed on
+`main`, at your request. `geometry_msgs` was already a dependency, so no other edits were needed.
+
+**Why:** fiducials_detector with `use_depth` fills it, and `rviz_bridge` draws the markers in 3D. The new field changes
+the type hash, so every package using `Fiducial` must be rebuilt (fiducials_detector, surface_selector, rviz_bridge).
+
+**Tested:** `colcon build --packages-select custom_interfaces`, then the dependents built.
+
+### Object.center_3d and Object.hull_contour_3d (2026-09-29)
+
+**What:** `msg/Object.msg` gets `geometry_msgs/Point center_3d` and `geometry_msgs/Point[] hull_contour_3d`: the
+object's centre and hull outline on their rays at the depth of its top surface, in the optical frame, in metres.
+`center_3d` is all 0 and `hull_contour_3d` empty without depth. Changed on `main`, at your request.
+
+**Why:** object_detector with `use_depth` fills them, as fiducials_detector fills `Fiducial.corners_3d`, and
+`rviz_bridge` draws the objects in 3D.
+- Alternative: one depth value per contour point. Rejected: contour pixels lie on the edge, where the depth mixes the
+  object with the table behind it.
+- Alternative: an oriented 3D bounding box. Rejected for now: no use case needs the orientation yet.
+- Height above the table is not a field: consumers get it from `center_3d` via TF.
+
+**Tested:** `colcon build --packages-select custom_interfaces object_detector rviz_bridge` passes. The type hash
+changes, so every package using `Object` must be rebuilt.
