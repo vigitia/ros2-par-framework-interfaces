@@ -24,6 +24,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Object.msg"
   "msg/ObjectList.msg"
   "msg/Page.msg"
+  "msg/PageList.msg"
   "msg/ProjectionCorners.msg"
   "msg/ProjectionMapping.msg"
   "srv/AddTrainingData.srv"

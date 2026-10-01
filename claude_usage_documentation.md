@@ -124,3 +124,20 @@ object's centre and hull outline on their rays at the depth of its top surface, 
 
 **Tested:** `colcon build --packages-select custom_interfaces object_detector rviz_bridge` passes. The type hash
 changes, so every package using `Object` must be rebuilt.
+
+### `PageList.msg`, `Page.msg` corner order documented (2026-10-01)
+
+**What:** new `PageList` (header + `Page[] pages`) for `page_locator`, added to `rosidl_generate_interfaces()`.
+`Page.msg` gets a comment: corners are raw camera pixels in the order top left, bottom left, bottom right, top
+right, and `id` is the page number (markers `4n .. 4n + 3`).
+
+**Why:** the old VIGITIA node published one `Page` per message and only when a page moved, so a removed page was
+never announced. `page_locator` now publishes all current pages as one list for every fiducials message, like
+`FiducialsList`; an absent page means it is gone. The corner order is the old node's and is kept so ported
+consumers keep working; it is written down because it differs from `Fiducial` (top left, top right, ...).
+
+**Alternatives:** keep single `Page` messages and add a "removed" flag: rejected, consumers would have to track
+state; the list is the convention every other detector here follows. Reorder the corners to match `Fiducial`:
+rejected for now, nothing in the new framework uses `Page` yet, but old VIGITIA consumers expect this order.
+
+**Dependencies:** none new (`std_msgs` is already declared).
