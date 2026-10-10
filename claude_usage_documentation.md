@@ -141,3 +141,25 @@ state; the list is the convention every other detector here follows. Reorder the
 rejected for now, nothing in the new framework uses `Page` yet, but old VIGITIA consumers expect this order.
 
 **Dependencies:** none new (`std_msgs` is already declared).
+
+### `Gesture.msg` reworked, new `GestureList.msg` (2026-10-10)
+
+**What:** `Gesture.msg` replaces the VIGITIA fields (`string hand_observation_id`, `type`, bare `x`, `y`, `z`) with
+`uint64 hand_id`, `handedness`, `gesture_type` (constants `PINCH`, `PINCH_OPEN`, `POINT`), a `geometry_msgs/Point
+position` in the table frame, the thumb-index `distance` in metres and in palm lengths, and a pointing ray
+(`ray_valid`, `ray_origin`, `ray_direction`, `ray_hit`). New `GestureList` (header + `Gesture[] gestures`), added to
+`rosidl_generate_interfaces()`.
+
+**Why:** the new `gesture_detector` node publishes the current gesture of every hand per frame. The old fields had no
+frame, a string id that did not match `HandLandmarks.id`, and no room for a distance or a ray. Positions are in the
+table frame (`world`, metres), the framework's common coordinates, so consumers map them to the projector with
+`par_geometry.table_to_projector`. `type` became `gesture_type`, as the old TODO asked (`type` shadows a Python
+builtin). The palm-length distance exists because without a depth camera there is no metric one.
+
+**Alternatives:** keep `Gesture.msg` and add new message names: rejected, nothing consumes `Gesture`, so a second,
+similar message would only add confusion. One event message per gesture start/end (as the VIGITIA node published):
+rejected, a per-frame list like `HandLandmarksList` keeps the detector stateless towards consumers; they derive
+clicks or holds themselves. Projector pixels in the message: rejected, that would tie the detector to the projector
+calibration.
+
+**Dependencies:** none new (`geometry_msgs` is already declared in `CMakeLists.txt` and `package.xml`).

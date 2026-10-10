@@ -1,3 +1,4 @@
+# Interface list entries co-authored by Claude Code
 cmake_minimum_required(VERSION 3.16)
 project(custom_interfaces)
 
@@ -17,6 +18,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Fiducial.msg"
   "msg/FiducialsList.msg"
   "msg/Gesture.msg"
+  "msg/GestureList.msg"
   "msg/HandLandmark.msg"
   "msg/HandLandmarks.msg"
   "msg/HandLandmarksList.msg"
