@@ -163,3 +163,16 @@ clicks or holds themselves. Projector pixels in the message: rejected, that woul
 calibration.
 
 **Dependencies:** none new (`geometry_msgs` is already declared in `CMakeLists.txt` and `package.xml`).
+
+### `Gesture.msg`: `pixel` and `position_valid` (2026-10-12)
+
+**What:** `Gesture.msg` gets `geometry_msgs/Point pixel` (the gesture point in camera pixels, always set) and
+`bool position_valid` before `position`. The header comment says `frame_id` applies to `position` and the ray.
+
+**Why:** `gesture_detector` should also work without calibration, e.g. with a bare webcam. Without intrinsics and
+camera pose there is no table position, so the gesture needs a location that never depends on calibration.
+
+**Alternatives:** reusing `position` with the camera frame as `frame_id` and pixels in x/y: rejected, the unit of
+`position` would silently depend on `frame_id`, and a consumer that does not check it reads pixels as metres. NaN in
+`position` instead of a flag: rejected, NaN propagates silently through arithmetic, and `ray_valid` already sets the
+flag pattern in this message.

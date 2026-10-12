@@ -3,7 +3,7 @@
 # One hand's current gesture. gesture_detector publishes all gestures of a frame together as GestureList.
 
 # stamp: copied from the camera image the hand landmarks were detected in. frame_id: the table frame (world), in which
-# every position and direction below is given, in metres; the table is its plane z = 0.
+# position and the ray are given, in metres; the table is its plane z = 0. pixel is in the camera image.
 std_msgs/Header header
 
 # Tracking id and "Left" / "Right" of the hand, as in HandLandmarks.msg
@@ -19,7 +19,12 @@ string POINT="point"
 string gesture_type
 
 # PINCH, PINCH_OPEN: midpoint between thumb and index fingertip. POINT: index fingertip.
-# Measured in 3D with a depth camera; without one, where the camera ray through the point hits the table.
+# pixel: that point in pixels of the camera image (z = 0), always set, so also without any calibration.
+geometry_msgs/Point pixel
+# position: the same point in the table frame. Measured in 3D with a depth camera (needs the camera pose); without
+# one, where the camera ray through the pixel hits the table (needs the camera pose and calibrated intrinsics).
+# position_valid is false when neither is possible; position is then (0, 0, 0).
+bool position_valid
 geometry_msgs/Point position
 
 # PINCH, PINCH_OPEN: distance between thumb and index fingertip in metres; -1 without depth at both tips. POINT: -1.
