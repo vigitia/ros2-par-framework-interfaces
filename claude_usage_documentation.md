@@ -176,3 +176,21 @@ camera pose there is no table position, so the gesture needs a location that nev
 `position` would silently depend on `frame_id`, and a consumer that does not check it reads pixels as metres. NaN in
 `position` instead of a flag: rejected, NaN propagates silently through arithmetic, and `ray_valid` already sets the
 flag pattern in this message.
+
+### `ProjectionMapping.msg`: `projector_center` (2026-10-12)
+
+**What:** `ProjectionMapping.msg` gets `bool projector_center_valid` and `geometry_msgs/Point projector_center`, the
+projector's optical centre in the table frame, in metres.
+
+**Why:** the projection mask (`ros2-par-framework-projection-mask`) has to find the projector pixel that lights a
+point above the table, e.g. a hand. The homography only covers the table plane; with the centre, the point is
+projected along its projector ray onto the table and then through the homography. The centre is calibrated with a
+raised board and travels with the mapping, because it belongs to the same projector setup and goes stale with it.
+
+**Alternatives:** all-zero coordinates as "not calibrated": rejected, the message already uses explicit validity
+flags (`Gesture.msg`), and a consumer that skips the check would use the table origin as the centre. A second
+homography for a raised plane instead of the centre: rejected, it fixes one more height, while the centre covers
+every height with three numbers. A separate message and topic: rejected, the centre is only meaningful together
+with this homography, and two latched topics could disagree after a recalibration.
+
+**Dependencies:** none new (`geometry_msgs` is already declared in `CMakeLists.txt` and `package.xml`).
