@@ -16,3 +16,10 @@ float64[9] homography
 
 # RMS reprojection error of the calibration, in projector pixels
 float64 reprojection_error
+
+# The projector's optical centre in the table frame, in metres: every projector pixel's ray starts
+# there. With it, a point above the table maps to the pixel that lights it (par_geometry's
+# project_to_table, then the homography); the homography alone only covers the table plane.
+# Valid only when projector_center_valid is true, i.e. after the calibration with a raised board.
+bool projector_center_valid
+geometry_msgs/Point projector_center
