@@ -194,3 +194,9 @@ every height with three numbers. A separate message and topic: rejected, the cen
 with this homography, and two latched topics could disagree after a recalibration.
 
 **Dependencies:** none new (`geometry_msgs` is already declared in `CMakeLists.txt` and `package.xml`).
+
+### Package renamed to `par_framework_interfaces` (2026-10-22)
+
+**What:** `<name>` in `package.xml` and `project()` in `CMakeLists.txt` are now `par_framework_interfaces`; the README uses the new name and tells how to port VIGITIA nodes that still import `custom_interfaces`.
+
+**Why:** the old name described how the package came to exist rather than what it contains. Every consumer was renamed in the same pass (see the framework repo's log); a compatibility package under the old name was rejected because nothing outside these repos needs it.

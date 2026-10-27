@@ -1,6 +1,5 @@
-# Interface list entries co-authored by Claude Code
 cmake_minimum_required(VERSION 3.16)
-project(custom_interfaces)
+project(par_framework_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)

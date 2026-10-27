@@ -1,4 +1,4 @@
-# Reworked with Claude Code for gesture_detector, from the VIGITIA message of the same name.
+# Written with the help of Claude Code
 # One hand's current gesture. gesture_detector publishes all gestures of a frame together as GestureList.
 
 # stamp: copied from the camera image the hand landmarks were detected in. frame_id: the table frame (world), in which
