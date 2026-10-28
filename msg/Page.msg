@@ -5,8 +5,8 @@ int64 id
 string description
 # corners
 # Added with the help of Claude Code:
-# In pixels of the raw camera image, in the order top left, bottom left, bottom right, top right of the printed
-# page. id is the page number: page_locator's page n carries the markers 4n .. 4n + 3.
+# In pixels of the raw camera image, in the order top left, top right, bottom right, bottom left of the printed page
+# (clockwise, as in Fiducial). id is the page number: page_locator's page n carries the markers 4n .. 4n + 3.
 float64 x0
 float64 y0
 float64 x1

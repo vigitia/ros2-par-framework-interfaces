@@ -200,3 +200,11 @@ with this homography, and two latched topics could disagree after a recalibratio
 **What:** `<name>` in `package.xml` and `project()` in `CMakeLists.txt` are now `par_framework_interfaces`; the README uses the new name and tells how to port VIGITIA nodes that still import `custom_interfaces`.
 
 **Why:** the old name described how the package came to exist rather than what it contains. Every consumer was renamed in the same pass (see the framework repo's log); a compatibility package under the old name was rejected because nothing outside these repos needs it.
+
+### `Page.msg` corners clockwise (2026-10-28)
+
+**What:** the comment now gives the corner order top left, top right, bottom right, bottom left, which
+`page_locator` publishes from now on. Comment only: the fields and the type hash are unchanged.
+
+**Why:** the same order as `Fiducial` and every other quad in the framework; the old order was kept only for VIGITIA
+consumers that are not part of the framework (reasoning in `page_locator`'s log).
