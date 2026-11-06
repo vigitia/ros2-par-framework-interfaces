@@ -208,3 +208,11 @@ with this homography, and two latched topics could disagree after a recalibratio
 
 **Why:** the same order as `Fiducial` and every other quad in the framework; the old order was kept only for VIGITIA
 consumers that are not part of the framework (reasoning in `page_locator`'s log).
+
+## 2026-11-06: `FIST` gesture in `Gesture.msg`
+
+**What changed:** New constant `FIST="fist"` (all four fingers curled in); `pixel`/`position` of a fist are the mean of the fingers' middle joints, `distance` and `distance_palm_lengths` are -1. The PINCH comment says "not stretched" instead of "curled" for middle, ring and pinky, as `gesture_detector` now checks.
+
+**Why:** `gesture_detector` publishes the fist as its own gesture; with depth, its height above the table is the basis for detecting knocks later.
+
+**Alternatives:** *A separate message for hand postures*: the fist is one more `gesture_type` with the same fields, so a new message would duplicate `Gesture`.
