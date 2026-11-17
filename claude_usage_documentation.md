@@ -216,3 +216,16 @@ consumers that are not part of the framework (reasoning in `page_locator`'s log)
 **Why:** `gesture_detector` publishes the fist as its own gesture; with depth, its height above the table is the basis for detecting knocks later.
 
 **Alternatives:** *A separate message for hand postures*: the fist is one more `gesture_type` with the same fields, so a new message would duplicate `Gesture`.
+
+## 2026-11-14: `UpdateModel.model_name` renamed to `model_file_name`
+
+**What changed:** the request field of `srv/UpdateModel.srv` is `model_file_name`; comments say what it holds (a
+weights file in the detector's `models_dir`, empty for the detector's `model_file_name` parameter) and what `success`
+means (false: the detector keeps its current model). Callers: `object_detector` (server) and
+`transfer_learning_service` in `ros2-par-framework-object-teaching` (client), both updated.
+
+**Why:** the field carries a file name, not a model's display name; the detector's parameter has the same name now,
+so the request and the setting read alike.
+
+**Alternatives:** keeping `model_name` and only documenting it: avoids an interface change, but leaves the one name in
+the chain that does not say it is a file.

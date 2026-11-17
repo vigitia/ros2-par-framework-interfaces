@@ -1,3 +1,4 @@
-string model_name
+string model_file_name
 ---
+# Whether the detector loaded the file; on false it keeps its current model
 bool success
