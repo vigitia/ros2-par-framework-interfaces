@@ -194,3 +194,38 @@ every height with three numbers. A separate message and topic: rejected, the cen
 with this homography, and two latched topics could disagree after a recalibration.
 
 **Dependencies:** none new (`geometry_msgs` is already declared in `CMakeLists.txt` and `package.xml`).
+
+### Package renamed to `par_framework_interfaces` (2026-10-22)
+
+**What:** `<name>` in `package.xml` and `project()` in `CMakeLists.txt` are now `par_framework_interfaces`; the README uses the new name and tells how to port VIGITIA nodes that still import `custom_interfaces`.
+
+**Why:** the old name described how the package came to exist rather than what it contains. Every consumer was renamed in the same pass (see the framework repo's log); a compatibility package under the old name was rejected because nothing outside these repos needs it.
+
+### `Page.msg` corners clockwise (2026-10-28)
+
+**What:** the comment now gives the corner order top left, top right, bottom right, bottom left, which
+`page_locator` publishes from now on. Comment only: the fields and the type hash are unchanged.
+
+**Why:** the same order as `Fiducial` and every other quad in the framework; the old order was kept only for VIGITIA
+consumers that are not part of the framework (reasoning in `page_locator`'s log).
+
+## 2026-11-06: `FIST` gesture in `Gesture.msg`
+
+**What changed:** New constant `FIST="fist"` (all four fingers curled in); `pixel`/`position` of a fist are the mean of the fingers' middle joints, `distance` and `distance_palm_lengths` are -1. The PINCH comment says "not stretched" instead of "curled" for middle, ring and pinky, as `gesture_detector` now checks.
+
+**Why:** `gesture_detector` publishes the fist as its own gesture; with depth, its height above the table is the basis for detecting knocks later.
+
+**Alternatives:** *A separate message for hand postures*: the fist is one more `gesture_type` with the same fields, so a new message would duplicate `Gesture`.
+
+## 2026-11-14: `UpdateModel.model_name` renamed to `model_file_name`
+
+**What changed:** the request field of `srv/UpdateModel.srv` is `model_file_name`; comments say what it holds (a
+weights file in the detector's `models_dir`, empty for the detector's `model_file_name` parameter) and what `success`
+means (false: the detector keeps its current model). Callers: `object_detector` (server) and
+`transfer_learning_service` in `ros2-par-framework-object-teaching` (client), both updated.
+
+**Why:** the field carries a file name, not a model's display name; the detector's parameter has the same name now,
+so the request and the setting read alike.
+
+**Alternatives:** keeping `model_name` and only documenting it: avoids an interface change, but leaves the one name in
+the chain that does not say it is a file.
