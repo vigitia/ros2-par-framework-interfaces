@@ -1,3 +1,5 @@
+# Movement detected above the tracked surface
+
 std_msgs/Header header
 
 bool movement

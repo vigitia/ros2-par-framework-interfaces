@@ -1,4 +1,5 @@
 # Written with the help of Claude Code
+# TODO: This file is still very work in progress. It will definitely change in the future.
 # One hand's current gesture. gesture_detector publishes all gestures of a frame together as GestureList.
 
 # stamp: copied from the camera image the hand landmarks were detected in. frame_id: the table frame (world), in which

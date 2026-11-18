@@ -1,3 +1,5 @@
+# A Transfer Learning process when re-training a CNN
+
 # Request parameters (Goal)
 string[] classes
 ---

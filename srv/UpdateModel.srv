@@ -1,3 +1,5 @@
+# Tell the object detector that a new model is available/should be used
+
 string model_file_name
 ---
 # Whether the detector loaded the file; on false it keeps its current model

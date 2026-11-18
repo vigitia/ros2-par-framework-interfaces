@@ -1,3 +1,5 @@
+# When working with promptable segmentation, e.g. with SAM Models, a new prompt can be set via this service
+
 string prompt
 ---
 bool success

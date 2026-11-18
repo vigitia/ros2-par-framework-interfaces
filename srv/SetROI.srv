@@ -1,3 +1,5 @@
+# Set a region of interest for nodes that use this
+
 geometry_msgs/Point[] points
 ---
 bool success
