@@ -1,3 +1,4 @@
+# One detected object
 # Based on: https://github.com/mgonzs13/yolo_ros/blob/main/yolo_msgs/msg/Detection.msg
 
 std_msgs/Header header

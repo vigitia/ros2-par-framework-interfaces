@@ -1,7 +1,0 @@
-string camera_name
-sensor_msgs/Image full_frame
-int16 target_resolution_width
-int16 target_resolution_height
-geometry_msgs/Point[] subregion_corners
----
-sensor_msgs/Image projection_area_frame

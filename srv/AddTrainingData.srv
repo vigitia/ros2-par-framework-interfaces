@@ -1,3 +1,5 @@
+# New training image available -> File gets processed and response is returned
+
 string filepath
 string filename
 string current_class

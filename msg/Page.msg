@@ -1,9 +1,13 @@
+# A page, e.g. a tracked A4 piece of paper on the tabletop
+
 std_msgs/Header header
-# id
+
 int64 id
+
 # description
 string description
-# corners
+
+# page corners
 float64 x0
 float64 y0
 float64 x1

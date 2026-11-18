@@ -1,5 +1,5 @@
-# Written by Claude Code
 # Stores a new table-to-projector mapping and republishes it on /projection_mapping
+
 ProjectionMapping mapping
 ---
 bool success
