@@ -1,4 +1,0 @@
-string camera_name
----
-float32[] mtx
-float32[] dst

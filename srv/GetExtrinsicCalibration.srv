@@ -1,5 +1,0 @@
-string camera_name_1
-string camera_name_2
----
-float32[] rotation
-float32[] translation
