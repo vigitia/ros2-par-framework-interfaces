@@ -2,8 +2,8 @@
 # TODO: This file is still very work in progress. It will definitely change in the future.
 # One hand's current gesture. gesture_detector publishes all gestures of a frame together as GestureList.
 
-# stamp: copied from the camera image the hand landmarks were detected in. frame_id: the table frame (world), in which
-# position and the ray are given, in metres; the table is its plane z = 0. pixel is in the camera image.
+# stamp: copied from the camera image the hand landmarks were detected in. frame_id: the surface frame (world), in which
+# position and the ray are given, in metres; the surface is its plane z = 0. pixel is in the camera image.
 std_msgs/Header header
 
 # Tracking id and "Left" / "Right" of the hand, as in HandLandmarks.msg
@@ -21,11 +21,11 @@ string FIST="fist"
 string gesture_type
 
 # PINCH, PINCH_OPEN: midpoint between thumb and index fingertip. POINT: index fingertip. FIST: mean of the four
-# fingers' middle joints, the front of the fist. With a depth camera, the z of position is its height above the table.
+# fingers' middle joints, the front of the fist. With a depth camera, the z of position is its height above the surface.
 # pixel: that point in pixels of the camera image (z = 0), always set, so also without any calibration.
 geometry_msgs/Point pixel
-# position: the same point in the table frame. Measured in 3D with a depth camera (needs the camera pose); without
-# one, where the camera ray through the pixel hits the table (needs the camera pose and calibrated intrinsics).
+# position: the same point in the surface frame. Measured in 3D with a depth camera (needs the camera pose); without
+# one, where the camera ray through the pixel hits the surface (needs the camera pose and calibrated intrinsics).
 # position_valid is false when neither is possible; position is then (0, 0, 0).
 bool position_valid
 geometry_msgs/Point position
@@ -36,8 +36,8 @@ float64 distance
 # depth camera. POINT, FIST: -1.
 float64 distance_palm_lengths
 
-# POINT only: the ray along the index finger (knuckle to tip, starting at the tip) and where it hits the table.
-# ray_valid is false without depth at index knuckle and tip, and when the finger points away from the table.
+# POINT only: the ray along the index finger (knuckle to tip, starting at the tip) and where it hits the surface.
+# ray_valid is false without depth at index knuckle and tip, and when the finger points away from the surface.
 bool ray_valid
 geometry_msgs/Point ray_origin
 # Unit vector

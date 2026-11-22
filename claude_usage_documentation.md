@@ -1,6 +1,13 @@
 # Claude Code usage documentation
 
-Changes Claude Code made to this repository, with the reasoning and the alternatives considered.
+This file logs the changes that Claude Code (an AI coding assistant) made in this repository.
+Each change was discussed with the maintainer before it was made: the design decisions were
+taken together, and Claude Code then implemented them.
+
+Each entry records what changed and why, including the alternatives that were considered and
+why they were rejected. The code Claude Code wrote is also marked in the source:
+`Written by Claude Code` at the top of files it wrote entirely, `Written with the help of
+Claude Code` on functions or lines it added or changed in human-written files.
 
 ## 2026-09-24: `ProjectionCorners.msg` and `SetProjectionCorners.srv`
 
