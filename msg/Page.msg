@@ -1,4 +1,4 @@
-# A page, e.g. a tracked A4 piece of paper on the tabletop
+# A page, e.g. a tracked A4 piece of paper on the surface
 
 std_msgs/Header header
 

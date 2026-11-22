@@ -314,3 +314,33 @@ images through a service, which the framework avoids.
   framework's topics anyway, and git history keeps the definitions.
 - *Copyright headers in every file so the linter can run:* rejected; one license declaration in `package.xml` is
   enough for a package of message definitions.
+
+## 2026-11-22: "table" renamed to "surface"
+
+### What changed
+
+- Comments in the message definitions say "surface" (`ProjectionMapping`, `Page`, `Gesture`, ...);
+  no field changed.
+
+### Why / alternatives
+
+The framework is a camera and a projector aimed at the same surface, which can be a table, a wall or a
+floor. Names with "table" assumed a tabletop. Chosen: "surface" for the plane z = 0 of `world`
+everywhere in the framework (defined in `packages/par_geometry/README.md` of the core repository
+`ros2-par-framework`), and "projection surface" in texts users read (log messages, parameter
+descriptions, app and sensor node descriptions, setup wizard), where the bare word would be vague.
+The `par_geometry` conversions are named after both sides with their unit
+(`camera_pixels_to_surface`, `surface_to_projector_pixels`, `projector_pixels_to_surface`,
+`surface_to_camera_pixels`, `depth_image_to_surface`), and `project_to_table` became
+`follow_projector_rays_to_surface`, because "project" next to "projector" read as if the function
+used the projector.
+
+- *Keep "table":* rejected, wrong for walls and floors.
+- *"plane":* rejected, it does not say which plane, and the code has others (image plane).
+- *Renaming only the `par_geometry` functions:* rejected, calls would then mix both words
+  (`camera_pixels_to_surface(..., rotation_optical_in_table, ...)`).
+- *`compute_` prefixes (`compute_surface_points_from_camera_pixels`):* rejected, twice as long for
+  pure conversions; `a_to_b` already says what goes in and what comes out.
+
+"tabletop" stays where it names a kind of system or an app ("PAR tabletop", window titles, the
+Wayland socket name), "dining table" stays a detector class name, and database tables stay tables.
